@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коты(Смешные) | Контакты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background-color: #fff5f5;
+        }
+        
+        header {
+            background-color: #ff85a2;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #ff6b8b;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+            color: #ff6b8b;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            flex: 1 1 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: #ff85a2;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card h3 {
+            color: #ff6b8b;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .meme-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b8b;
+            background: #fff0f5;
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff6b8b;
+        }
+        
+        footer {
+            background-color: #ff85a2;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Коты(Смешные)</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="top.html">Топ коты</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <img src="https://i.imgur.com/JR7pe9P.png" alt="Аватар">
+            <span>Привет, Котолюб!</span>
+            <button class="logout-btn">Выйти</button>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Наши контакты</h1>
+        
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Горячая линия</h3>
+                <p>Звоните в любое время дня и ночи!</p>
+                <div class="meme-number">8-800-КИС-КИС</div>
+                <div class="meme-number">8-800-МЯУ-МЯУ</div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Техподдержка</h3>
+                <p>Поможем с любыми проблемами!</p>
+                <div class="meme-number">8-800-555-35-35</div>
+                <div class="meme-number">8-800-КОТ-ПОМОЩЬ</div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <h3>Отдел по котам</h3>
+                <p>Специалисты по усатым-полосатым</p>
+                <div class="meme-number">8-800-МУР-МУР</div>
+                <div class="meme-number">8-800-ХВОСТ-123</div>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h2 style="text-align: center; margin-bottom: 1.5rem; color: #ff6b8b;">Напишите нам</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Ваш email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить</button>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2023 ТикТок Коты. Все права защищены.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>Сайт создан для настоящих любителей котиков</p>
+    </footer>
+
+    <script>
+        // Выход из системы
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            if(confirm('Точно хотите выйти?')) {
+                window.location.href = 'login.html';
+            }
+        });
+        
+        // Можно добавить обработку формы
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за сообщение! Мы ответим вам в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

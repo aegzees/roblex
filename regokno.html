@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .registration-form {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .registration-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error input {
+            border-color: #dc3545;
+        }
+        
+        .form-group.success input {
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-form">
+        <h2>Регистрация</h2>
+        <form id="registerForm" action="/register" method="POST">
+            <div class="form-group">
+                <label for="username">Имя пользователя</label>
+                <input type="text" id="username" name="username" required>
+                <div class="error-message" id="username-error">Имя пользователя должно содержать от 3 до 20 символов</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="email-error">Введите корректный email</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="password-error">Пароль должен содержать минимум 8 символов</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Подтвердите пароль</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <div class="error-message" id="confirm-password-error">Пароли не совпадают</div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            
+            <div class="login-link">
+                Уже есть аккаунт? <a href="login.html">Войти</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сбрасываем предыдущие ошибки
+            resetErrors();
+            
+            // Получаем значения полей
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            let isValid = true;
+            
+            // Валидация имени пользователя
+            if (username.length < 3 || username.length > 20) {
+                showError('username', 'Имя пользователя должно содержать от 3 до 20 символов');
+                isValid = false;
+            }
+            
+            // Валидация email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('email', 'Введите корректный email');
+                isValid = false;
+            }
+            
+            // Валидация пароля
+            if (password.length < 8) {
+                showError('password', 'Пароль должен содержать минимум 8 символов');
+                isValid = false;
+            }
+            
+            // Проверка совпадения паролей
+            if (password !== confirmPassword) {
+                showError('confirm-password', 'Пароли не совпадают');
+                isValid = false;
+            }
+            
+            // Если форма валидна, можно отправить данные
+            if (isValid) {
+                // Здесь можно добавить отправку формы на сервер
+                alert('Регистрация прошла успешно!');
+                // this.submit(); // Раскомментируйте для реальной отправки формы
+            }
+        });
+        
+        function showError(fieldName, message) {
+            const field = document.getElementById(fieldName);
+            const errorElement = document.getElementById(`${fieldName}-error`);
+            
+            field.parentElement.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function resetErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            errorMessages.forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            formGroups.forEach(el => {
+                el.classList.remove('error');
+                el.classList.remove('success');
+            });
+        }
+        
+        // Добавляем валидацию при вводе
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                const fieldName = this.id;
+                const value = this.value.trim();
+                const parent = this.parentElement;
+                
+                parent.classList.remove('error');
+                parent.classList.remove('success');
+                document.getElementById(`${fieldName}-error`).style.display = 'none';
+                
+                if (value) {
+                    parent.classList.add('success');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТикТок Коты | Галерея</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        body {
+            background-color: #fff5f5;
+        }
+        
+        header {
+            background-color: #ff85a2;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #ff6b8b;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+            color: #ff6b8b;
+        }
+        
+        .add-cat-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            background-color: #ff85a2;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff6b8b;
+        }
+        
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .cat-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .cat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cat-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #000;
+        }
+        
+        .cat-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .cat-info {
+            padding: 1.5rem;
+        }
+        
+        .cat-info h3 {
+            color: #ff6b8b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cat-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .cat-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .delete-btn {
+            background-color: #ff6b8b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        footer {
+            background-color: #ff85a2;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Коты(Смешные)</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="top.html">Топ коты</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <img src="https://i.imgur.com/JR7pe9P.png" alt="Аватар">
+            <span>Привет, Котолюб!</span>
+            <button class="logout-btn">Выйти</button>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Галерея смешных котов</h1>
+        
+        <div class="add-cat-form">
+            <h2 style="text-align: center; margin-bottom: 1.5rem; color: #ff6b8b;">Добавить своего кота</h2>
+            <form id="addCatForm">
+                <div class="form-group">
+                    <label for="cat-name">Имя кота</label>
+                    <input type="text" id="cat-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cat-media">Видео или фото</label>
+                    <input type="file" id="cat-media" accept="video/*, image/*" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cat-description">Описание</label>
+                    <textarea id="cat-description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cat-category">Категория</label>
+                    <select id="cat-category">
+                        <option value="funny">Смешные</option>
+                        <option value="cute">Милые</option>
+                        <option value="crazy">Безумные</option>
+                        <option value="smart">Умные</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">Добавить кота</button>
+            </form>
+        </div>
+        
+        <div class="cat-grid" id="catGrid">
+            <!-- Примеры котов будут добавляться сюда -->
+            <div class="cat-item">
+                <video controls>
+                    <source src="https://i.imgur.com/7RZV3aG.mp4" type="video/mp4">
+                </video>
+                <div class="cat-info">
+                    <h3>Танцующий кот</h3>
+                    <p>Этот кот знает все последние танцевальные движения!</p>
+                    <div class="cat-stats">
+                        <span>1.2M просмотров</span>
+                        <span>245K лайков</span>
+                    </div>
+                    <button class="delete-btn">Удалить</button>
+                </div>
+            </div>
+            
+            <div class="cat-item">
+                <img src="https://i.imgur.com/JR7pe9P.png" alt="Смешной кот">
+                <div class="cat-info">
+                    <h3>Кот в шляпе</h3>
+                    <p>Стильный кот в модной шляпе покоряет TikTok</p>
+                    <div class="cat-stats">
+                        <span>890K просмотров</span>
+                        <span>150K лайков</span>
+                    </div>
+                    <button class="delete-btn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>©Коты Смешнявки. Все права защищены.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>Сайт создан для настоящих любителей котиков</p>
+    </footer>
+
+    <script>
+        // Хранилище для котов (в реальном приложении это будет база данных)
+        let cats = [
+            {
+                id: 1,
+                name: "Танцующий кот",
+                media: "https://i.imgur.com/7RZV3aG.mp4",
+                type: "video",
+                description: "Этот кот знает все последние танцевальные движения!",
+                views: "1.2M",
+                likes: "245K",
+                category: "funny"
+            },
+            {
+                id: 2,
+                name: "Кот в шляпе",
+                media: "https://i.imgur.com/JR7pe9P.png",
+                type: "image",
+                description: "Стильный кот в модной шляпе покоряет TikTok",
+                views: "890K",
+                likes: "150K",
+                category: "cute"
+            }
+        ];
+        
+        // Обработчик формы добавления кота
+        document.getElementById('addCatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('cat-name').value;
+            const description = document.getElementById('cat-description').value;
+            const category = document.getElementById('cat-category').value;
+            const fileInput = document.getElementById('cat-media');
+            const file = fileInput.files[0];
+            
+            if (!name || !description || !file) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
+            }
+            
+            // Создаем временную ссылку для превью
+            const mediaUrl = URL.createObjectURL(file);
+            const mediaType = file.type.startsWith('video') ? 'video' : 'image';
+            
+            // Создаем нового кота
+            const newCat = {
+                id: Date.now(), // Используем timestamp как временный ID
+                name,
+                media: mediaUrl,
+                type: mediaType,
+                description,
+                views: "0",
+                likes: "0",
+                category
+            };
+            
+            // Добавляем кота в массив
+            cats.push(newCat);
+            
+            // Добавляем кота в галерею
+            addCatToGallery(newCat);
+            
+            // Очищаем форму
+            this.reset();
+            
+            alert('Кот успешно добавлен в галерею!');
+        });
+        
+        // Функция для добавления кота в галерею
+        function addCatToGallery(cat) {
+            const catGrid = document.getElementById('catGrid');
+            
+            const catItem = document.createElement('div');
+            catItem.className = 'cat-item';
+            
+            let mediaElement;
+            if (cat.type === 'video') {
+                mediaElement = document.createElement('video');
+                mediaElement.controls = true;
+                const source = document.createElement('source');
+                source.src = cat.media;
+                source.type = 'video/mp4';
+                mediaElement.appendChild(source);
+            } else {
+                mediaElement = document.createElement('img');
+                mediaElement.src = cat.media;
+                mediaElement.alt = cat.name;
+            }
+            
+            const catInfo = document.createElement('div');
+            catInfo.className = 'cat-info';
+            
+            catInfo.innerHTML = `
+                <h3>${cat.name}</h3>
+                <p>${cat.description}</p>
+                <div class="cat-stats">
+                    <span>${cat.views} просмотров</span>
+                    <span>${cat.likes} лайков</span>
+                </div>
+                <button class="delete-btn" data-id="${cat.id}">Удалить</button>
+            `;
+            
+            catItem.appendChild(mediaElement);
+            catItem.appendChild(catInfo);
+            catGrid.appendChild(catItem);
+            
+            // Добавляем обработчик для кнопки удаления
+            catItem.querySelector('.delete-btn').addEventListener('click', function() {
+                if (confirm('Удалить этого кота из галереи?')) {
+                    const catId = parseInt(this.getAttribute('data-id'));
+                    deleteCat(catId);
+                    catItem.remove();
+                }
+            });
+        }
+        
+        // Функция для удаления кота
+        function deleteCat(id) {
+            cats = cats.filter(cat => cat.id !== id);
+        }
+        
+        // Выход из системы
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            if(confirm('Точно хотите выйти?')) {
+                window.location.href = 'login.html';
+            }
+        });
+        
+        // При загрузке страницы добавляем всех котов в галерею
+        window.addEventListener('DOMContentLoaded', function() {
+            const catGrid = document.getElementById('catGrid');
+            // Очищаем дефолтные примеры
+            catGrid.innerHTML = '';
+            
+            // Добавляем всех котов из хранилища
+            cats.forEach(cat => addCatToGallery(cat));
+        });
+    </script>
+</body>
+</html>

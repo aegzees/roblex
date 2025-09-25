@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .login-form {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error input {
+            border-color: #dc3545;
+        }
+        
+        .form-group.success input {
+            border-color: #28a745;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        
+        .forgot-password a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Вход в систему</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="login-email">Email или имя пользователя</label>
+                <input type="text" id="login-email" name="login-email" required>
+                <div class="error-message" id="login-email-error">Введите email или имя пользователя</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password">Пароль</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <div class="error-message" id="login-password-error">Введите пароль</div>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Запомнить меня</label>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="/forgot-password">Забыли пароль?</a>
+            </div>
+            
+            <button type="submit" class="submit-btn">Войти</button>
+            
+            <div class="register-link">
+                Нет аккаунта? <a href="/register">Зарегистрироваться</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сбрасываем предыдущие ошибки
+            resetErrors();
+            
+            // Получаем значения полей
+            const loginEmail = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            let isValid = true;
+            
+            // Валидация email/логина
+            if (!loginEmail) {
+                showError('login-email', 'Введите email или имя пользователя');
+                isValid = false;
+            }
+            
+            // Валидация пароля
+            if (!password) {
+                showError('login-password', 'Введите пароль');
+                isValid = false;
+            } else if (password.length < 8) {
+                showError('login-password', 'Пароль должен содержать минимум 8 символов');
+                isValid = false;
+            }
+            
+            // Если форма валидна, перенаправляем на index.html
+            if (isValid) {
+                // Здесь можно добавить проверку логина/пароля на сервере
+                // Пока просто перенаправляем
+                window.location.href = 'index.html';
+                
+                // Для реального проекта:
+                // 1. Отправляем данные на сервер
+                // 2. Получаем ответ
+                // 3. Если успешно - редирект
+                // 4. Если ошибка - показываем сообщение
+            }
+        });
+        
+        function showError(fieldName, message) {
+            const field = document.getElementById(fieldName);
+            const errorElement = document.getElementById(`${fieldName}-error`);
+            
+            field.parentElement.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function resetErrors() {
+            const errorMessages = document.querySelectorAll('.error-message');
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            errorMessages.forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            formGroups.forEach(el => {
+                el.classList.remove('error');
+                el.classList.remove('success');
+            });
+        }
+        
+        // Добавляем валидацию при вводе
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                const fieldName = this.id;
+                const value = this.value.trim();
+                const parent = this.parentElement;
+                
+                parent.classList.remove('error');
+                parent.classList.remove('success');
+                document.getElementById(`${fieldName}-error`).style.display = 'none';
+                
+                if (value) {
+                    parent.classList.add('success');
+                }
+            });
+        });
+        
+        // Проверяем, есть ли сохраненные данные для "Запомнить меня"
+        window.addEventListener('DOMContentLoaded', function() {
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+            const rememberCheckbox = document.getElementById('remember');
+            
+            if (rememberedEmail) {
+                document.getElementById('login-email').value = rememberedEmail;
+                rememberCheckbox.checked = true;
+            }
+            
+            // Сохраняем email при выходе, если стоит галочка
+            document.getElementById('loginForm').addEventListener('submit', function() {
+                if (rememberCheckbox.checked) {
+                    localStorage.setItem('rememberedEmail', document.getElementById('login-email').value.trim());
+                } else {
+                    localStorage.removeItem('rememberedEmail');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
